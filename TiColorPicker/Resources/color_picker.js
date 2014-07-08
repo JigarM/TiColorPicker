@@ -100,15 +100,15 @@ function rgbToHsl(r, g, b) {
         var d = max - min;
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
         switch(max) {
-            case r:
-                h = (g - b) / d + (g < b ? 6 : 0);
-                break;
-            case g:
-                h = (b - r) / d + 2;
-                break;
-            case b:
-                h = (r - g) / d + 4;
-                break;
+        case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+        case g:
+            h = (b - r) / d + 2;
+            break;
+        case b:
+            h = (r - g) / d + 4;
+            break;
         }
         h /= 6;
     }
@@ -120,14 +120,126 @@ function rgbToHsl(r, g, b) {
     };
 }
 
-function createColorPicker(params) {
+/**
+ * HSV to RGB color conversion
+ *
+ * H runs from 0 to 360 degrees
+ * S and V run from 0 to 100
+ *
+ * Ported from the excellent java algorithm by Eugene Vishnevsky at:
+ * http://www.cs.rit.edu/~ncs/color/t_convert.html
+ *
+ * Refffered Concepr From http://snipplr.com/view/14590/hsv-to-rgb/
+ */
+function hsvToRgb(h, s, v) {
+    var r, g, b;
+    var i;
+    var f, p, q, t;
+    // Make sure our arguments stay in-range
+    h = Math.max(0, Math.min(360, h));
+    s = Math.max(0, Math.min(100, s));
+    v = Math.max(0, Math.min(100, v));
+    // We accept saturation and value arguments from 0 to 100 because that's
+    // how Photoshop represents those values. Internally, however, the
+    // saturation and value are calculated from a range of 0 to 1. We make
+    // That conversion here.
+    s /= 100;
+    v /= 100;
+    if (s == 0) {
+        // Achromatic (grey)
+        r = g = b = v;
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+    h /= 60;
+    // sector 0 to 5
+    i = Math.floor(h);
+    f = h - i;
+    // factorial part of h
+    p = v * (1 - s);
+    q = v * (1 - s * f);
+    t = v * (1 - s * (1 - f));
+    switch(i) {
+    case 0:
+        r = v;
+        g = t;
+        b = p;
+        break;
+    case 1:
+        r = q;
+        g = v;
+        b = p;
+        break;
+    case 2:
+        r = p;
+        g = v;
+        b = t;
+        break;
+    case 3:
+        r = p;
+        g = q;
+        b = v;
+        break;
+    case 4:
+        r = t;
+        g = p;
+        b = v;
+        break;
+    default:
+        r = v;
+        g = p;
+        b = q;
+    }
+    //return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    return {
+        r : Math.round(r * 255),
+        g : Math.round(g * 255),
+        b : Math.round(b * 255)
+    };
+}
+
+function rgbToHsv(R, G, B) {
+    var rr, gg, bb, r = R / 255, g = G / 255, b = B / 255, h, s, v = Math.max(r, g, b), diff = v - Math.min(r, g, b), diffc = function(c) {
+        return (v - c) / 6 / diff + 1 / 2;
+    };
+
+    if (diff == 0) {
+        h = s = 0;
+    } else {
+        s = diff / v;
+        rr = diffc(r);
+        gg = diffc(g);
+        bb = diffc(b);
+
+        if (r === v) {
+            h = bb - gg;
+        } else if (g === v) {
+            h = (1 / 3) + rr - bb;
+        } else if (b === v) {
+            h = (2 / 3) + gg - rr;
+        }
+        if (h < 0) {
+            h += 1;
+        } else if (h > 1) {
+            h -= 1;
+        }
+    }
+    return {
+        h : Math.round(h * 360),
+        s : Math.round(s * 100),
+        v : Math.round(v * 100)
+    };
+}
+
+exports.createColorPicker = function(params) {
     var h, s, l;
     // = 0,100,50;
     if (params.hexColor) {
         var rgb = hexToRgb(params.hexColor);
         Ti.API.log('debug', rgb);
+        Ti.API.info('rgb ==> ' + JSON.stringify(rgb));
         var hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
         Ti.API.log('debug', hsl);
+        Ti.API.info('hsl ==> ' + JSON.stringify(hsl));
         h = hsl.h;
         s = hsl.s;
         l = hsl.l;
@@ -138,7 +250,7 @@ function createColorPicker(params) {
     }
     var _return = Ti.UI.createWindow();
     var HSLImage = Titanium.UI.createImageView({
-        image : '/image/color_picker.png',
+        image : '/image/color.png',
         height : 256,
         width : 300,
         top : 109,
@@ -149,10 +261,16 @@ function createColorPicker(params) {
         width : 11,
         height : 11
     });
+
     HSLImage.addEventListener('touchmove', function(e) {
         h = Math.round((e.x / HSLImage.width) * 359);
-        s = Math.round(100 - (e.y / HSLImage.height) * 100);
+        s = Math.round(100-(e.y / HSLImage.height) * 100);
         l = Math.round((e.y / HSLImage.height) * 100);
+
+        Ti.API.info("h: " + h);
+        Ti.API.info("s: " + s);
+        Ti.API.info("l: " + l);
+
         if (l > 100) {
             l = 100;
         }
@@ -169,14 +287,20 @@ function createColorPicker(params) {
         } else if (s > 100) {
             s = 100;
         }
-        var hexColor = rgbToHex(hslToRgb(h, s, l));
+        
+        var _rgb = hslToRgb(h, s, l);
+        var hexColor = rgbToHex(_rgb);
+        
+        Ti.API.info("_rgb: " + JSON.stringify(_rgb));
+        Ti.API.info("hexColor: " + hexColor);
+        
         var hexColorGradient = rgbToHex(hslToRgb(h, s, 50));
         _return.backgroundColor = hexColor;
-        
+
         _return.fireEvent("selectedcolor", {
             color : hexColor
         });
-        
+
         var x = e.x;
         var y = e.y;
         if (x < 0) {
@@ -220,11 +344,11 @@ function createColorPicker(params) {
         var hexColor = rgbToHex(hslToRgb(h, s, l));
         var hexColorGradient = rgbToHex(hslToRgb(h, s, 50));
         _return.backgroundColor = hexColor;
-        
+
         _return.fireEvent("selectedcolor", {
             color : hexColor
         });
-        
+
         var x = e.x;
         var y = e.y;
         if (x < 0) {
@@ -242,11 +366,11 @@ function createColorPicker(params) {
         circle.left = x + (HSLImage.left - circle.width / 2);
         circle.top = y + (HSLImage.top - circle.width / 2);
     });
-    
+
     _return.add(HSLImage);
     _return.add(circle);
     _return.backgroundColor = rgbToHex(hslToRgb(h, s, l));
-    
+
     // place circle
     if (l == 0 || l == 100) {
         circle.left = HSLImage.width + HSLImage.left - (circle.width / 2);

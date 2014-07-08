@@ -1,9 +1,6 @@
-Titanium.UI.setBackgroundColor('#000');
-Ti.include('color_picker.js');
+var picker = require('color_picker');
 
-// create base UI tab and root window
-//
-var win1 = createColorPicker({
+var win = picker.createColorPicker({
     hexColor : "#23456w"
 });
 
@@ -14,12 +11,10 @@ var lbl = Ti.UI.createLabel({
         fontWeight : "bold"
     }
 });
-win1.add(lbl);
+win.add(lbl);
 
-win1.addEventListener("selectedcolor", function(e) {
-    //Ti.API.log('info', e);
-    //Ti.API.info('Color is ==> ' + e.color);
+win.addEventListener("selectedcolor", function(e) {
     lbl.text = "Selected Color is : #"+e.color;
 });
-// open tab group
-win1.open();
+
+win.open();
