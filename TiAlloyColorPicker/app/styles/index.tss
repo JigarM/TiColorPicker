@@ -1,0 +1,11 @@
+"#index": {
+	backgroundColor:"white"
+},
+"Label": {
+	bottom : "50dp",
+    font : {
+        fontSize : "18dp",
+        fontWeight : "bold"
+    },
+    zIndex : "10"
+} 
