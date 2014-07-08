@@ -5,8 +5,9 @@ Color Picker using Appcelerator's Titanium framework.
 
 
 <p align="center" >
-<a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot24-Jun-201433205PM_zpsa0b5829d.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot24-Jun-201433205PM_zpsa0b5829d.png" border="0" alt="Color Picker photo iOSSimulatorScreenshot24-Jun-201433205PM_zpsa0b5829d.png" width="266" height="500"/></a>
-<a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot24-Jun-201434352PM_zpsddc3bbfa.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot24-Jun-201434352PM_zpsddc3bbfa.png" border="0" alt="Color Picker 1 photo iOSSimulatorScreenshot24-Jun-201434352PM_zpsddc3bbfa.png" width="266" height="500"/></a>
+<a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png" border="0" alt="Pink photo iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png" width="266" height="500"/></a>
+<a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot08-Jul-201442858pm_zps73433f92.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot08-Jul-201442858pm_zps73433f92.png" border="0" alt="Light Pink photo iOSSimulatorScreenshot08-Jul-201442858pm_zps73433f92.png" width="266" height="500"/></a>
+<a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot08-Jul-201442906pm_zps069983a3.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot08-Jul-201442906pm_zps069983a3.png" border="0" alt="Dark Pink photo iOSSimulatorScreenshot08-Jul-201442906pm_zps069983a3.png" width="266" height="500"/></a>
 </p>
 
 The MIT License (MIT)
