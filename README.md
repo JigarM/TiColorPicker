@@ -5,7 +5,9 @@ Color Picker using Appcelerator's Titanium framework.
 
 * Source Code: [https://github.com/JigarM/TiColorPicker/tree/master](https://github.com/JigarM/TiColorPicker/tree/master)
 * Test app for Titanium Classic Version: [https://github.com/JigarM/TiColorPicker/tree/master/TiColorPicker](https://github.com/JigarM/TiColorPicker/tree/master/TiColorPicker)
-* * Test app for Titanium Alloy Version: [https://github.com/JigarM/TiColorPicker/tree/master/TiAlloyColorPicker](https://github.com/JigarM/TiColorPicker/tree/master/TiAlloyColorPicker)
+* Test app for Titanium Alloy Version: [https://github.com/JigarM/TiColorPicker/tree/master/TiAlloyColorPicker](https://github.com/JigarM/TiColorPicker/tree/master/TiAlloyColorPicker)
+
+=========================
 
 <p align="center" >
 <a href="http://s1282.photobucket.com/user/jigarm_0809/media/iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png.html" target="_blank"><img src="http://i1282.photobucket.com/albums/a534/jigarm_0809/iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png" border="0" alt="Pink photo iOSSimulatorScreenshot08-Jul-201442851pm_zpsd3c8bdf0.png" width="266" height="500"/></a>
