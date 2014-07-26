@@ -1,4 +1,4 @@
-TiColorPicker
+TiColorPicker [![Appcelerator Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://appcelerator.com/titanium/) [![Appcelerator Alloy](http://www-static.appcelerator.com/badges/alloy-git-badge-sq.png)](http://appcelerator.com/alloy/)
 =============
 
 Color Picker using Appcelerator's Titanium framework.
